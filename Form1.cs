@@ -23,7 +23,7 @@ namespace WindowsFormsApp8
             oFile.Filter = "Bitmap file|*.bmp|JPEG file|*.jpg";
             if (oFile.ShowDialog() == DialogResult.OK)
             {
-                Form2 frm = new Form2(oFile.FileName);  // Truyền đường dẫn ảnh vào đây
+                Form2 frm = new Form2(oFile.FileName); 
                 frm.MdiParent = this;
                 frm.Show();
             }
