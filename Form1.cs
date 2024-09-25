@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp3
+namespace WindowsFormsApp8
 {
     public partial class Form1 : Form
     {
@@ -17,57 +17,33 @@ namespace WindowsFormsApp3
             InitializeComponent();
         }
 
-        private void add_Click(object sender, EventArgs e)
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //tao 1 listviewitem => dong du lieu
-            ListViewItem lvi = new ListViewItem(txtFirstName.Text);
-            //them du lieu cho cac cot con lai cua dong 
-            lvi.SubItems.Add(txtLastName.Text);
-            lvi.SubItems.Add(txtPhone.Text);
-            //dua dong du lieu len listview
-            lvSinhVien.Items.Add(lvi);
-        }
-
-        private void delete_Click(object sender, EventArgs e)
-        {
-            foreach (ListViewItem lvi in lvSinhVien.SelectedItems)
+            OpenFileDialog oFile = new OpenFileDialog();
+            oFile.Filter = "Bitmap file|*.bmp|JPEG file|*.jpg";
+            if (oFile.ShowDialog() == DialogResult.OK)
             {
-                lvSinhVien.Items.Remove(lvi);
+                Form2 frm = new Form2(oFile.FileName);  // Truyền đường dẫn ảnh vào đây
+                frm.MdiParent = this;
+                frm.Show();
             }
         }
 
-        private void lvSinhVien_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (lvSinhVien.SelectedItems.Count > 0)
-            {
-                //lay dong duoc chon 
-                ListViewItem lvi = lvSinhVien.SelectedItems[0];
-                //gan tung cot cua dong cho cac gia trij tuong ung
-                string fn = lvi.SubItems[0].Text;
-                string ln = lvi.SubItems[1].Text;
-                string phone = lvi.SubItems[2].Text;
-                //gan nguoc len cac text box
-                txtFirstName.Text = fn;
-                txtLastName.Text = ln;
-               
-                txtPhone.Text = phone;
 
-              
-            }
+        private void casedeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LayoutMdi(MdiLayout.Cascade);
+
         }
 
-        private void update_Click(object sender, EventArgs e)
+        private void tileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListViewItem lvi = lvSinhVien.SelectedItems[0];
-
-            lvi.SubItems[0].Text = txtFirstName.Text;  
-            lvi.SubItems[1].Text = txtLastName.Text;  
-            lvi.SubItems[2].Text = txtPhone.Text;
+            LayoutMdi(MdiLayout.TileHorizontal);
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void tileToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            LayoutMdi(MdiLayout.TileVertical);
         }
     }
 }
